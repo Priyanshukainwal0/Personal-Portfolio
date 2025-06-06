@@ -596,7 +596,12 @@
     </div>
   </footer>
 
-  <!-- SCRIPT SECTION -->
+  <!-- ────────────────────────────────────────────────────────────────────────*
+       11) EMAILJS SDK + SCRIPT SECTION                                          *
+       *──────────────────────────────────────────────────────────────────────── */
+  <!-- Make sure this line is present, otherwise emailjs.sendForm(...) won't work -->
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+
   <script>
     function toggleDarkMode() {
       document.documentElement.classList.toggle('dark-mode');
@@ -665,10 +670,12 @@
       }
     }
 
+    // Initialize EmailJS (drop in your own user/public key if necessary)
     (function(){
       emailjs.init("xk9fd-OzhfjQ56lZW");
     })();
 
+    // Handle the contact form submission
     document.getElementById('contact-form').addEventListener('submit', function(event) {
       event.preventDefault();
       emailjs.sendForm('service_vb67une', 'template_elsj2y6', this)
@@ -680,10 +687,8 @@
         });
     });
 
-    // Show the footer only when a section is visible (hides during login)
+    // Hide all sections until login
     document.querySelector('footer').style.display = 'none';
-
-    // Initially, hide all page-sections; login screen covers everything
     document.querySelectorAll('.page-section').forEach(sec => sec.style.display = 'none');
   </script>
 </body>
