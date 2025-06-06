@@ -350,13 +350,13 @@
       background: var(--accent);
       color: white;
       border: none;
-      width: 32px;             /* fixed small width */
-      height: 32px;            /* fixed small height */
+      width: 32px;             
+      height: 32px;            
       padding: 0;
       border-radius: 50%;
       font-size: 16px;         /* icon fits inside */
       line-height: 32px;       /* center the 🌙 vertically */
-      text-align: center;      /* center horizontally */
+      text-align: center;      
       cursor: pointer;
       z-index: 300;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
@@ -426,7 +426,7 @@
 </head>
 
 <body>
-  <!-- DARK MODE TOGGLE (very small, bottom-right) -->
+  <!-- DARK MODE TOGGLE  -->
   <button id="darkToggleBtn" onclick="toggleDarkMode()" aria-label="Toggle Dark Mode">🌙</button>
 
   <!-- LOGIN SCREEN -->
@@ -439,7 +439,7 @@
     </div>
   </div>
 
-  <!-- NAVIGATION BAR (buttons now even smaller so “Contact” fits) -->
+  <!-- NAVIGATION BAR  -->
   <nav style="display: none;">
     <ul>
       <li onclick="showSection('welcome')">Welcome</li>
@@ -598,8 +598,7 @@
 
   <!-- ────────────────────────────────────────────────────────────────────────*
        11) EMAILJS SDK + SCRIPT SECTION                                          *
-       *──────────────────────────────────────────────────────────────────────── */
-  <!-- Make sure this line is present, otherwise emailjs.sendForm(...) won't work -->
+       *──────────────────────────────────────────────────────────────────────── */>
   <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 
   <script>
