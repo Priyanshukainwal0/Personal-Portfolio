@@ -101,20 +101,23 @@
     nav ul {
       list-style: none;
       display: flex;
-      gap: 20px;
+      gap: 15px;
       margin: 0;
       padding: 0;
       align-items: center;
       height: 100%;
+      justify-content: space-around;
+      flex-wrap: nowrap; /* keep items on one line */
     }
 
     nav ul li {
-      padding: 8px 14px;
+      padding: 6px 8px; /* reduced padding */
       border-radius: 4px;
       color: var(--text-dark);
       cursor: pointer;
       transition: all 0.3s ease;
-      font-size: 1rem;
+      font-size: 0.95rem; /* slightly smaller */
+      white-space: nowrap;
     }
 
     nav ul li:hover {
@@ -342,17 +345,17 @@
      *────────────────────────────────────────────────────────────────────────*/
     #darkToggleBtn {
       position: fixed;
-      bottom: 20px;
-      right: 20px;
+      top: calc(var(--nav-height) + 10px);
+      right: 10px;
       background: var(--accent);
       color: white;
       border: none;
-      padding: 12px 14px;
+      padding: 8px 10px;      /* smaller padding */
       border-radius: 50%;
-      font-size: 20px;
+      font-size: 16px;        /* slightly smaller */
       cursor: pointer;
       z-index: 300;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
       transition: transform 0.3s ease, background 0.3s ease;
     }
     #darkToggleBtn:hover {
@@ -366,12 +369,11 @@
      *────────────────────────────────────────────────────────────────────────*/
     @media (max-width: 768px) {
       nav ul {
-        flex-direction: column;
-        gap: 8px;
+        gap: 10px;
       }
       nav ul li {
-        padding: 8px 10px;
-        font-size: 0.95rem;
+        padding: 6px 8px;
+        font-size: 0.85rem;
       }
 
       .page-section {
@@ -400,8 +402,8 @@
 
     @media (max-width: 480px) {
       nav ul li {
-        font-size: 0.85rem;
-        padding: 6px 8px;
+        font-size: 0.75rem;
+        padding: 4px 6px;
       }
 
       .welcome-images {
