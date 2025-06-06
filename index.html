@@ -16,6 +16,7 @@
       --background: linear-gradient(135deg, #e3f2fd, #e8eaf6);
       --text: #333;
       --text-dark: #f5f5f5;
+      --nav-height: 50px; /* fixed nav height */
     }
 
     html, body {
@@ -85,14 +86,15 @@
      * 2) NAVIGATION BAR                                                        *
      *────────────────────────────────────────────────────────────────────────*/
     nav {
-      display: flex;
-      justify-content: center;
-      background: var(--primary);
-      padding: 10px 0;
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
+      height: var(--nav-height);
+      display: flex;
+      justify-content: center;
+      background: var(--primary);
+      padding: 0;
       z-index: 100;
     }
 
@@ -100,8 +102,10 @@
       list-style: none;
       display: flex;
       gap: 20px;
-      padding: 0;
       margin: 0;
+      padding: 0;
+      align-items: center;
+      height: 100%;
     }
 
     nav ul li {
@@ -110,6 +114,7 @@
       color: var(--text-dark);
       cursor: pointer;
       transition: all 0.3s ease;
+      font-size: 1rem;
     }
 
     nav ul li:hover {
@@ -179,12 +184,11 @@
      *────────────────────────────────────────────────────────────────────────*/
     .page-section {
       display: none;
-      padding: 80px 20px 100px; /* Top padding leaves room for fixed nav */
-      margin-top: 50px;         /* Push content below nav */
+      padding: calc(var(--nav-height) + 30px) 20px 60px; /* Top padding leaves room for fixed nav */
       max-width: 900px;
-      margin-left: auto;
-      margin-right: auto;
+      margin: 0 auto;
       text-align: center;
+      box-sizing: border-box;
     }
 
     section {
@@ -197,7 +201,7 @@
      *────────────────────────────────────────────────────────────────────────*/
     .welcome-images {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
       gap: 20px;
       justify-items: center;
       margin-top: 30px;
@@ -208,8 +212,8 @@
       height: auto;
       border-radius: 10px;
       transition: all 1s ease-out;
-      opacity: 0;
-      transform: scale(0.8);
+      opacity: 1; /* ensure visible by default */
+      transform: none;
     }
 
     .about-me-img {
@@ -230,17 +234,12 @@
     }
 
     .tools-img, .certs-img, .get-img, .uni-img {
-      max-width: 300px;
-      width: 100%;
+      max-width: 100%;
+      height: auto;
       border-radius: 10px;
       transition: all 1s ease-out;
-    }
-    .tools-img,
-    .certs-img,
-    .get-img,
-    .uni-img {
-      opacity: 0;
-      transform: scale(0.8);
+      opacity: 1; /* visible by default */
+      transform: none;
     }
     .tools-img:hover {
       transform: translateY(-8px);
@@ -259,6 +258,7 @@
       box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     }
 
+
     /*────────────────────────────────────────────────────────────────────────*
      * 6) TEXT, BUTTONS, LINKS                                                   *
      *────────────────────────────────────────────────────────────────────────*/
@@ -270,6 +270,7 @@
       font-size: 1rem;
       border-radius: 5px;
       border: none;
+      box-sizing: border-box;
     }
 
     button {
@@ -307,10 +308,11 @@
     footer {
       background: var(--secondary);
       color: white;
-      padding: 15px;
+      padding: 15px 10px;
       text-align: center;
       width: 100%;
       margin-top: auto;
+      box-sizing: border-box;
     }
     footer a {
       color: var(--accent);
@@ -363,21 +365,17 @@
      * 10) RESPONSIVE BREAKPOINTS                                                  *
      *────────────────────────────────────────────────────────────────────────*/
     @media (max-width: 768px) {
-      nav {
-        padding: 8px 0;
-      }
       nav ul {
         flex-direction: column;
         gap: 8px;
       }
       nav ul li {
-        padding: 10px;
-        font-size: 1rem;
+        padding: 8px 10px;
+        font-size: 0.95rem;
       }
 
       .page-section {
-        padding: 60px 15px 80px;
-        margin-top: 50px;
+        padding: calc(var(--nav-height) + 20px) 15px 40px;
       }
 
       /* Override grid to block for smaller screens */
@@ -388,11 +386,11 @@
       }
 
       .welcome-images {
-        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
       }
 
       #welcome h2 {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
       }
 
       footer {
@@ -402,8 +400,8 @@
 
     @media (max-width: 480px) {
       nav ul li {
-        font-size: 0.9rem;
-        padding: 8px;
+        font-size: 0.85rem;
+        padding: 6px 8px;
       }
 
       .welcome-images {
@@ -411,12 +409,11 @@
       }
 
       .page-section {
-        padding: 50px 10px 60px;
-        margin-top: 45px;
+        padding: calc(var(--nav-height) + 15px) 10px 30px;
       }
 
       #welcome h2 {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
       }
     }
   </style>
@@ -456,19 +453,18 @@
     </p>
 
     <div class="welcome-images">
-      <img src="Tech.png" alt="Priyanshu" class="Tech-img">
-      <img src="Uni.jpg" alt="My University" class="uni-img">
+      <img src="Tech.png" alt="Tech Image" class="Tech-img">
+      <img src="Uni.jpg" alt="University" class="uni-img">
       <img src="Tools.jpg" alt="Tools Photo" class="tools-img">
       <img src="Certs.jpg" alt="Certifications Photo" class="certs-img">
-      <img src="Get.jpg" alt="Photo" class="get-img">
+      <img src="Get.jpg" alt="Another Photo" class="get-img">
     </div>
   </div>
-
 
   <div id="about" class="page-section">
     <h2>About Me</h2>
     <p>
-      I’m Priyanshu — an IT enthusiast passionate about networking, cybersecurity, and emerging technologies. 
+      I’m Priyanshu — an IT enthusiast passionate about networking, cybersecurity, and emerging technologies.
       I love creating smart solutions and constantly growing my expertise in the tech world.
     </p>
 
@@ -651,11 +647,13 @@
         imageClasses.forEach((selector, index) => {
           const img = section.querySelector(selector);
           if (img) {
+            img.style.opacity = '0';
+            img.style.transform = 'scale(0.8)';
             setTimeout(() => {
               img.style.transition = 'opacity 1s ease-out, transform 1s ease-out';
               img.style.opacity = '1';
               img.style.transform = 'scale(1)';
-            }, 2200 + index * 1000);
+            }, 500 + index * 400);
           }
         });
       }
@@ -675,6 +673,12 @@
           alert('❌ Failed to send email: ' + JSON.stringify(error));
         });
     });
+
+    // Show the footer only when a section is visible (hides during login)
+    document.querySelector('footer').style.display = 'none';
+
+    // Initially, hide all page-sections; login screen covers everything
+    document.querySelectorAll('.page-section').forEach(sec => sec.style.display = 'none');
   </script>
 </body>
 </html>
