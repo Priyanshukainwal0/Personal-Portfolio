@@ -101,7 +101,7 @@
     nav ul {
       list-style: none;
       display: flex;
-      gap: 15px;
+      gap: 5px; /* very narrow gap so all items fit */
       margin: 0;
       padding: 0;
       align-items: center;
@@ -111,12 +111,12 @@
     }
 
     nav ul li {
-      padding: 6px 8px; /* reduced padding */
+      padding: 3px 5px;       /* reduced padding further */
       border-radius: 4px;
       color: var(--text-dark);
       cursor: pointer;
       transition: all 0.3s ease;
-      font-size: 0.95rem; /* slightly smaller */
+      font-size: 0.75rem;      /* smaller font */
       white-space: nowrap;
     }
 
@@ -345,14 +345,14 @@
      *────────────────────────────────────────────────────────────────────────*/
     #darkToggleBtn {
       position: fixed;
-      top: calc(var(--nav-height) + 10px);
+      bottom: 10px;            /* place at bottom-right corner */
       right: 10px;
       background: var(--accent);
       color: white;
       border: none;
-      padding: 8px 10px;      /* smaller padding */
+      padding: 4px 6px;        /* even smaller padding */
       border-radius: 50%;
-      font-size: 16px;        /* slightly smaller */
+      font-size: 12px;         /* very small font */
       cursor: pointer;
       z-index: 300;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
@@ -369,11 +369,11 @@
      *────────────────────────────────────────────────────────────────────────*/
     @media (max-width: 768px) {
       nav ul {
-        gap: 10px;
+        gap: 4px;
       }
       nav ul li {
-        padding: 6px 8px;
-        font-size: 0.85rem;
+        padding: 2px 4px;
+        font-size: 0.65rem;
       }
 
       .page-section {
@@ -388,11 +388,11 @@
       }
 
       .welcome-images {
-        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
       }
 
       #welcome h2 {
-        font-size: 1.6rem;
+        font-size: 1.2rem;
       }
 
       footer {
@@ -402,8 +402,8 @@
 
     @media (max-width: 480px) {
       nav ul li {
-        font-size: 0.75rem;
-        padding: 4px 6px;
+        font-size: 0.55rem;
+        padding: 2px 3px;
       }
 
       .welcome-images {
@@ -415,14 +415,14 @@
       }
 
       #welcome h2 {
-        font-size: 1.3rem;
+        font-size: 1rem;
       }
     }
   </style>
 </head>
 
 <body>
-  <!-- DARK MODE TOGGLE -->
+  <!-- DARK MODE TOGGLE (now very small, bottom-right) -->
   <button id="darkToggleBtn" onclick="toggleDarkMode()" aria-label="Toggle Dark Mode">🌙</button>
 
   <!-- LOGIN SCREEN -->
@@ -435,7 +435,7 @@
     </div>
   </div>
 
-  <!-- NAVIGATION BAR -->
+  <!-- NAVIGATION BAR (buttons now even smaller so “Contact” definitely fits) -->
   <nav style="display: none;">
     <ul>
       <li onclick="showSection('welcome')">Welcome</li>
