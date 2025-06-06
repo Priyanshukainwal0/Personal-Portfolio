@@ -6,74 +6,9 @@
 
   <title>Priyanshu's Portfolio</title>
   <style>
-    /* Dark Mode Styles */
-    .dark-mode {
-      background: #0a192f;
-      color: #f5f5f5;
-    }
-    .dark-mode nav {
-      background: #1e1e2f;
-    }
-    .dark-mode a {
-      color: var(--accent);
-    }
-    .dark-mode a:hover {
-      color: #ffffff;
-    }
-    .dark-mode .login-box input,
-    .dark-mode .login-box button {
-      background: #333;
-      color: #fff;
-      border: 1px solid #666;
-    }
-    .dark-mode footer {
-      background: #1e1e2f;
-    }
-    .dark-mode .page-section,
-    .dark-mode section {
-      background: #0a192f !important;
-      color: #f5f5f5 !important;
-    }
-    .dark-mode,
-    .dark-mode body,
-    .dark-mode html {
-      background: #0a192f;
-      color: #f5f5f5;
-    }
-    .dark-mode #login-screen {
-      background: #0a192f; /* override gradient in dark mode */
-    }
-    .dark-mode .login-box {
-      background: #1e1e2f;
-      color: white;
-      box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
-    }
-
-    footer {
-      background: var(--secondary);
-      color: white;
-      padding: 15px;
-      text-align: center;
-      width: 100%;
-      margin-top: 40px;
-    }
-    html, body {
-      width: 100%;
-      height: 100%;
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #e3f2fd, #e8eaf6);
-    }
-
-    body {
-      display: flex;            /* enables flexbox on body */
-      flex-direction: column;   /* stack items vertically */
-    }
-
-    .page-section {
-      flex: 1;
-    }
+    /*────────────────────────────────────────────────────────────────────────*
+     * 1) DARK MODE + GLOBAL RESET/LAYOUT                                      *
+     *────────────────────────────────────────────────────────────────────────*/
     :root {
       --primary: #0a192f;
       --secondary: #112240;
@@ -83,11 +18,110 @@
       --text-dark: #f5f5f5;
     }
 
-    html, body, .login-box, .page-section,
-    nav, footer, input, button, textarea,
-    #login-screen, #darkToggleBtn {
-      transition: background 0.4s ease, color 0.4s ease, border 0.3s ease;
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--background);
+      color: var(--text);
+      overflow-x: hidden;
     }
+
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .dark-mode,
+    .dark-mode body,
+    .dark-mode html {
+      background: #0a192f;
+      color: #f5f5f5;
+    }
+
+    .dark-mode nav {
+      background: #1e1e2f;
+    }
+
+    .dark-mode a {
+      color: var(--accent);
+    }
+
+    .dark-mode a:hover {
+      color: #ffffff;
+    }
+
+    .dark-mode .login-box input,
+    .dark-mode .login-box button {
+      background: #333;
+      color: #fff;
+      border: 1px solid #666;
+    }
+
+    .dark-mode footer {
+      background: #1e1e2f;
+    }
+
+    .dark-mode .page-section,
+    .dark-mode section {
+      background: #0a192f !important;
+      color: #f5f5f5 !important;
+    }
+
+    .dark-mode #login-screen {
+      background: #0a192f; /* override gradient in dark mode */
+    }
+
+    .dark-mode .login-box {
+      background: #1e1e2f;
+      color: white;
+      box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+    }
+
+
+    /*────────────────────────────────────────────────────────────────────────*
+     * 2) NAVIGATION BAR                                                        *
+     *────────────────────────────────────────────────────────────────────────*/
+    nav {
+      display: flex;
+      justify-content: center;
+      background: var(--primary);
+      padding: 10px 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+      padding: 0;
+      margin: 0;
+    }
+
+    nav ul li {
+      padding: 8px 14px;
+      border-radius: 4px;
+      color: var(--text-dark);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    nav ul li:hover {
+      background: rgba(100, 255, 218, 0.2);
+      color: var(--accent);
+      text-decoration: underline;
+    }
+
+
+    /*────────────────────────────────────────────────────────────────────────*
+     * 3) LOGIN SCREEN                                                         *
+     *────────────────────────────────────────────────────────────────────────*/
     #login-screen {
       position: fixed;
       top: 0;
@@ -97,7 +131,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      z-index: 10;
+      z-index: 200;
       background: linear-gradient(135deg, #0d47a1, #1976d2);
     }
 
@@ -139,115 +173,95 @@
       background: #66bb6a;
     }
 
-    nav {
-      display: flex;
-      justify-content: center;
-      background: var(--primary); /* dark navy */
-      padding: 10px;
-    }
-    /* Animation keyframes for swipe-in */
-    @keyframes swipeIn {
-      0% {
-        transform: translateX(-100%);
-        opacity: 0;
-      }
-      100% {
-        transform: translateX(0);
-        opacity: 1;
-      }
+
+    /*────────────────────────────────────────────────────────────────────────*
+     * 4) SECTIONS                                                              *
+     *────────────────────────────────────────────────────────────────────────*/
+    .page-section {
+      display: none;
+      padding: 80px 20px 100px; /* Top padding leaves room for fixed nav */
+      margin-top: 50px;         /* Push content below nav */
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
     }
 
-    #welcome h2 {
-      opacity: 0;
+    section {
+      padding: 20px 0;
     }
-    .uni-img {
+
+
+    /*────────────────────────────────────────────────────────────────────────*
+     * 5) IMAGES AND HOVER EFFECTS                                               *
+     *────────────────────────────────────────────────────────────────────────*/
+    .welcome-images {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px;
+      justify-items: center;
+      margin-top: 30px;
+    }
+
+    .welcome-images img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      transition: all 1s ease-out;
       opacity: 0;
       transform: scale(0.8);
-      margin-top: 20px;
-      max-width: 300px;
-      width: 100%;
-      border-radius: 10px;
-      transition: opacity 1s ease-out, filter 1s ease-out, transform 1s ease-out;
     }
-    /* Tools image */
-    .tools-img {
-      opacity: 0;
-      transform: translateX(-50px);
-      margin-top: 20px;
+
+    .about-me-img {
+      display: block;
+      margin: 20px auto;
+      width: 100%;
+      max-width: 500px;
+      height: auto;
+      filter: grayscale(100%);
+      transition: filter 0.5s ease, transform 0.4s ease, box-shadow 0.4s ease;
+      cursor: pointer;
+      border-radius: 10px;
+    }
+    .about-me-img:hover {
+      filter: grayscale(0%);
+      transform: translateY(-8px) scale(1.05);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+    }
+
+    .tools-img, .certs-img, .get-img, .uni-img {
       max-width: 300px;
       width: 100%;
       border-radius: 10px;
       transition: all 1s ease-out;
+    }
+    .tools-img,
+    .certs-img,
+    .get-img,
+    .uni-img {
+      opacity: 0;
+      transform: scale(0.8);
     }
     .tools-img:hover {
       transform: translateY(-8px);
       box-shadow: 0 12px 24px rgba(0,0,0,0.3);
     }
-
-    /* Certs image */
-    .certs-img {
-      opacity: 0;
-      transform: translateX(50px);
-      margin-top: 20px;
-      max-width: 300px;
-      width: 100%;
-      border-radius: 10px;
-      transition: all 1s ease-out;
-    }
     .certs-img:hover {
       transform: scale(1.1);
       box-shadow: 0 0 20px rgba(100,255,218,0.6);
-    }
-
-    /* Get (GTM) image */
-    .get-img {
-      opacity: 0;
-      transform: rotate(-10deg) scale(0.8);
-      margin-top: 20px;
-      max-width: 300px;
-      width: 100%;
-      border-radius: 10px;
-      transition: all 1s ease-out;
     }
     .get-img:hover {
       transform: rotate(0deg) scale(1);
       filter: brightness(1.2);
     }
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 20px;
-      padding: 0;
-      margin: 0;
-    }
-    nav ul li {
-      padding: 8px 14px;
-      border-radius: 4px;
-      color: var(--text-dark);       /* light text on dark */
-      cursor: pointer;
-      transition: all 0.3s ease;
+    .uni-img:hover {
+      transform: scale(1);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     }
 
-    nav ul li:hover {
-      background: rgba(100, 255, 218, 0.2); /* minty highlight */
-      color: var(--accent);                 /* mint text */
-      text-decoration: underline;
-    }
-
-    .page-section {
-      display: none;
-      text-align: center;
-      padding: 60px 20px;
-      max-width: 900px;
-      margin: 40px auto;
-      padding-bottom: 100px; /* space for footer */
-    }
-
-    section {
-      padding: 20px;
-    }
-
+    /*────────────────────────────────────────────────────────────────────────*
+     * 6) TEXT, BUTTONS, LINKS                                                   *
+     *────────────────────────────────────────────────────────────────────────*/
     button, input, textarea {
       padding: 10px;
       margin: 10px 0;
@@ -264,90 +278,66 @@
       cursor: pointer;
       transition: background 0.3s;
     }
-
     button:hover {
       background: #66bb6a;
     }
 
-    form {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+    a {
+      color: #0a192f;
+      text-decoration: none;
+      transition: color 0.3s ease, text-decoration 0.3s ease;
+    }
+    a:hover {
+      color: var(--accent);
+      text-decoration: underline;
     }
 
     ul {
       list-style: none;
       padding: 0;
     }
-
     ul li {
       margin: 10px 0;
     }
-    /* About Me image hover effect */
-    .about-me-img {
-      display: block;              /* margin auto works */
-      margin: 20px auto;           /* center horizontally */
-      width: 100%;                 /* full width of container */
-      max-width: 500px;            /* cap it at 500px */
-      height: auto;                /* natural height ratio */
-      filter: grayscale(100%);
-      transition: filter 0.5s ease, transform 0.4s ease, box-shadow 0.4s ease;
-      cursor: pointer;
-      border-radius: 10px;
+
+
+    /*────────────────────────────────────────────────────────────────────────*
+     * 7) FOOTER                                                                 *
+     *────────────────────────────────────────────────────────────────────────*/
+    footer {
+      background: var(--secondary);
+      color: white;
+      padding: 15px;
+      text-align: center;
+      width: 100%;
+      margin-top: auto;
+    }
+    footer a {
+      color: var(--accent);
+    }
+    footer a:hover {
+      color: #ffffff;
     }
 
-    .about-me-img:hover {
-      filter: grayscale(0%);
-      transform: translateY(-8px) scale(1.05);   /* gentle pop */
-      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+
+    /*────────────────────────────────────────────────────────────────────────*
+     * 8) ANIMATIONS                                                              *
+     *────────────────────────────────────────────────────────────────────────*/
+    @keyframes swipeIn {
+      0% {
+        transform: translateX(-100%);
+        opacity: 0;
+      }
+      100% {
+        transform: translateX(0);
+        opacity: 1;
+      }
     }
 
-    /* Global link styles */
-    a {
-      color: #0a192f;  /* dark navy for links */
-      text-decoration: none;
-      transition: color 0.3s ease, text-decoration 0.3s ease;
-    }
 
-    a:hover {
-      color: var(--accent);  /* minty highlight on hover */
-      text-decoration: underline;
-    }
-
-    #experience img {
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
-      cursor: pointer;
-    }
-
-    #experience img:hover {
-      transform: scale(1.1);  /* scale up 10% */
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);  /* add a soft shadow for depth */
-    }
-
-    .welcome-images {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 20px;
-      justify-items: center;
-      margin-top: 30px;
-      max-width: 900px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .welcome-images img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 10px;
-      transition: all 1s ease-out;
-    }
-
-    #welcome {
-      max-height: 100vh;
-      overflow-y: hidden;  /* this stops the scrollbar */
-      padding-bottom: 40px;
-    }
-
+    /*────────────────────────────────────────────────────────────────────────*
+     * 9) DARK TOGGLE BUTTON                                                      *
+     *────────────────────────────────────────────────────────────────────────*/
     #darkToggleBtn {
       position: fixed;
       bottom: 20px;
@@ -359,68 +349,72 @@
       border-radius: 50%;
       font-size: 20px;
       cursor: pointer;
-      z-index: 999;
+      z-index: 300;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
       transition: transform 0.3s ease, background 0.3s ease;
     }
-
     #darkToggleBtn:hover {
       background: #4caf50;
       transform: scale(1.1);
     }
 
-    /* Footer-specific links */
-    footer a {
-      color: var(--accent);
-    }
 
-    footer a:hover {
-      color: #ffffff;
-    }
-
-    /* ----------------------------
-       RESPONSIVE STYLES START HERE
-       ---------------------------- */
+    /*────────────────────────────────────────────────────────────────────────*
+     * 10) RESPONSIVE BREAKPOINTS                                                  *
+     *────────────────────────────────────────────────────────────────────────*/
     @media (max-width: 768px) {
+      nav {
+        padding: 8px 0;
+      }
       nav ul {
         flex-direction: column;
-        gap: 10px;
+        gap: 8px;
       }
       nav ul li {
-        padding: 12px;
-        text-align: center;
-        font-size: 1.1rem;
+        padding: 10px;
+        font-size: 1rem;
       }
+
       .page-section {
-        padding: 40px 20px;
-        margin: 20px auto;
+        padding: 60px 15px 80px;
+        margin-top: 50px;
       }
+
       /* Override grid to block for smaller screens */
       #about > div,
       #experience > div,
       #certifications > div {
         display: block !important;
       }
+
       .welcome-images {
         grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
       }
-      /* Scale down header on mobile */
+
       #welcome h2 {
         font-size: 1.8rem;
       }
-      /* Reduce footer padding */
+
       footer {
         padding: 20px 10px;
       }
     }
 
     @media (max-width: 480px) {
+      nav ul li {
+        font-size: 0.9rem;
+        padding: 8px;
+      }
+
       .welcome-images {
         grid-template-columns: 1fr;
       }
+
       .page-section {
-        padding: 20px 10px;
+        padding: 50px 10px 60px;
+        margin-top: 45px;
       }
+
       #welcome h2 {
         font-size: 1.5rem;
       }
@@ -429,7 +423,9 @@
 </head>
 
 <body>
+  <!-- DARK MODE TOGGLE -->
   <button id="darkToggleBtn" onclick="toggleDarkMode()" aria-label="Toggle Dark Mode">🌙</button>
+
   <!-- LOGIN SCREEN -->
   <div id="login-screen">
     <div class="login-box">
@@ -468,10 +464,11 @@
     </div>
   </div>
 
-  <div id="about" class="page-section" style="max-width: 900px; margin: auto;">
-    <h2 style="text-align: center;">About Me</h2>
-    <p style="text-align: center;">
-      I’m Priyanshu — an IT enthusiast passionate about networking, cybersecurity, and emerging technologies.
+
+  <div id="about" class="page-section">
+    <h2>About Me</h2>
+    <p>
+      I’m Priyanshu — an IT enthusiast passionate about networking, cybersecurity, and emerging technologies. 
       I love creating smart solutions and constantly growing my expertise in the tech world.
     </p>
 
@@ -504,8 +501,8 @@
     <img src="About me.jpg" alt="Priyanshu" class="about-me-img">
   </div>
 
-  <div id="experience" class="page-section" style="max-width: 900px; margin: auto;">
-    <h2 style="text-align: center;">Experience</h2>
+  <div id="experience" class="page-section">
+    <h2>Experience</h2>
 
     <div style="display: grid; grid-template-columns: 220px 1fr; gap: 10px; margin-top: 20px;">
       <div style="font-weight: bold;">Bhavyam Group Pty Ltd (VIP):</div>
@@ -522,12 +519,12 @@
       <img 
         src="Experience.png" 
         alt="Experience Screenshot" 
-        style="max-width: 600px; width: 100%; height: auto;">
+        style="max-width: 100%; height: auto;">
     </div>
   </div>
 
-  <div id="certifications" class="page-section" style="max-width: 900px; margin: auto;">
-    <h2 style="text-align: center;">Certifications</h2>
+  <div id="certifications" class="page-section">
+    <h2>Certifications</h2>
 
     <div style="display: grid; grid-template-columns: 260px 1fr; gap: 10px; margin-top: 20px;">
       <div style="font-weight: bold;">Google IT Support:</div>
