@@ -378,7 +378,700 @@
       nav ul li {
         padding: 2px 4px;
         font-size: 0.65rem;
+      }<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>Priyanshu's Portfolio</title>
+  <style>
+    /*────────────────────────────────────────────────────────────────────────*
+     * 1) DARK MODE + GLOBAL RESET/LAYOUT                                      *
+     *────────────────────────────────────────────────────────────────────────*/
+    :root {
+      --primary: #0a192f;
+      --secondary: #112240;
+      --accent: #64ffda;
+      --background: linear-gradient(135deg, #e3f2fd, #e8eaf6);
+      --text: #333;
+      --text-dark: #f5f5f5;
+      --nav-height: 50px; /* fixed nav height */
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--background);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .dark-mode,
+    .dark-mode body,
+    .dark-mode html {
+      background: #0a192f;
+      color: #f5f5f5;
+    }
+
+    .dark-mode nav {
+      background: #1e1e2f;
+    }
+
+    .dark-mode a {
+      color: var(--accent);
+    }
+
+    .dark-mode a:hover {
+      color: #ffffff;
+    }
+
+    .dark-mode .login-box input,
+    .dark-mode .login-box button {
+      background: #333;
+      color: #fff;
+      border: 1px solid #666;
+    }
+
+    .dark-mode footer {
+      background: #1e1e2f;
+    }
+
+    .dark-mode .page-section,
+    .dark-mode section {
+      background: #0a192f !important;
+      color: #f5f5f5 !important;
+    }
+
+    .dark-mode #login-screen {
+      background: #0a192f; /* override gradient in dark mode */
+    }
+
+    .dark-mode .login-box {
+      background: #1e1e2f;
+      color: white;
+      box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+    }
+
+
+    /*────────────────────────────────────────────────────────────────────────*
+     * 2) NAVIGATION BAR                                                        *
+     *────────────────────────────────────────────────────────────────────────*/
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: var(--nav-height);
+      display: flex;
+      justify-content: center;
+      background: var(--primary);
+      padding: 0;
+      z-index: 100;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 5px; /* very narrow gap so all items fit */
+      margin: 0;
+      padding: 0;
+      align-items: center;
+      height: 100%;
+      justify-content: space-around;
+      flex-wrap: nowrap; /* keep items on one line */
+    }
+
+    nav ul li {
+      padding: 3px 5px;       /* reduced padding */
+      border-radius: 4px;
+      color: var(--text-dark);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 0.75rem;      /* smaller font */
+      white-space: nowrap;
+    }
+
+    nav ul li:hover {
+      background: rgba(100, 255, 218, 0.2);
+      color: var(--accent);
+      text-decoration: underline;
+    }
+
+
+    /*────────────────────────────────────────────────────────────────────────*
+     * 3) LOGIN SCREEN                                                         *
+     *────────────────────────────────────────────────────────────────────────*/
+    #login-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 200;
+      background: linear-gradient(135deg, #0d47a1, #1976d2);
+    }
+
+    .login-box {
+      background: white;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      text-align: center;
+      min-width: 300px;
+      max-width: 90%;
+    }
+
+    .login-box h1 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .login-box input {
+      padding: 10px;
+      margin: 10px 0;
+      width: 250px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+
+    .login-box button {
+      padding: 10px 20px;
+      background: #4caf50;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    .login-box button:hover {
+      background: #66bb6a;
+    }
+
+
+    /*────────────────────────────────────────────────────────────────────────*
+     * 4) SECTIONS                                                              *
+     *────────────────────────────────────────────────────────────────────────*/
+    .page-section {
+      display: none;
+      padding: calc(var(--nav-height) + 30px) 20px 60px; /* Top padding leaves room for fixed nav */
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+      box-sizing: border-box;
+    }
+
+    section {
+      padding: 20px 0;
+    }
+
+
+    /*────────────────────────────────────────────────────────────────────────*
+     * 5) IMAGES AND HOVER EFFECTS                                               *
+     *────────────────────────────────────────────────────────────────────────*/
+    .welcome-images {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 20px;
+      justify-items: center;
+      margin-top: 30px;
+    }
+
+    .welcome-images img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      transition: all 1s ease-out;
+      opacity: 1; /* ensure visible by default */
+      transform: none;
+    }
+
+    .about-me-img {
+      display: block;
+      margin: 20px auto;
+      width: 100%;
+      max-width: 500px;
+      height: auto;
+      filter: grayscale(100%);
+      transition: filter 0.5s ease, transform 0.4s ease, box-shadow 0.4s ease;
+      cursor: pointer;
+      border-radius: 10px;
+    }
+    .about-me-img:hover {
+      filter: grayscale(0%);
+      transform: translateY(-8px) scale(1.05);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+    }
+
+    .tools-img, .certs-img, .get-img, .uni-img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      transition: all 1s ease-out;
+      opacity: 1; /* visible by default */
+      transform: none;
+    }
+    .tools-img:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.3);
+    }
+    .certs-img:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px rgba(100,255,218,0.6);
+    }
+    .get-img:hover {
+      transform: rotate(0deg) scale(1);
+      filter: brightness(1.2);
+    }
+    .uni-img:hover {
+      transform: scale(1);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+
+    /*────────────────────────────────────────────────────────────────────────*
+     * 6) TEXT, BUTTONS, LINKS                                                   *
+     *────────────────────────────────────────────────────────────────────────*/
+    button, input, textarea {
+      padding: 10px;
+      margin: 10px 0;
+      width: 100%;
+      max-width: 400px;
+      font-size: 1rem;
+      border-radius: 5px;
+      border: none;
+      box-sizing: border-box;
+    }
+
+    button {
+      background: var(--accent);
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #66bb6a;
+    }
+
+    a {
+      color: #0a192f;
+      text-decoration: none;
+      transition: color 0.3s ease, text-decoration 0.3s ease;
+    }
+    a:hover {
+      color: var(--accent);
+      text-decoration: underline;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    ul li {
+      margin: 10px 0;
+    }
+
+
+    /*────────────────────────────────────────────────────────────────────────*
+     * 7) FOOTER                                                                 *
+     *────────────────────────────────────────────────────────────────────────*/
+    footer {
+      background: var(--secondary);
+      color: white;
+      padding: 15px 10px;
+      text-align: center;
+      width: 100%;
+      margin-top: auto;
+      box-sizing: border-box;
+    }
+    footer a {
+      color: var(--accent);
+    }
+    footer a:hover {
+      color: #ffffff;
+    }
+
+
+    /*────────────────────────────────────────────────────────────────────────*
+     * 8) ANIMATIONS                                                              *
+     *────────────────────────────────────────────────────────────────────────*/
+    @keyframes swipeIn {
+      0% {
+        transform: translateX(-100%);
+        opacity: 0;
       }
+      100% {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+
+    /*────────────────────────────────────────────────────────────────────────*
+     * 9) DARK TOGGLE BUTTON                                                      *
+     *────────────────────────────────────────────────────────────────────────*/
+    #darkToggleBtn {
+      position: fixed;
+      bottom: 16px;            /* bottom-right corner */
+      right: 16px;
+      background: var(--accent);
+      color: white;
+      border: none;
+      width: 32px;             
+      height: 32px;            
+      padding: 0;
+      border-radius: 50%;
+      font-size: 16px;         /* icon fits inside */
+      line-height: 32px;       /* center the 🌙 vertically */
+      text-align: center;      
+      cursor: pointer;
+      z-index: 300;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+    #darkToggleBtn:hover {
+      background: #4caf50;
+      transform: scale(1.1);
+    }
+
+
+    /*────────────────────────────────────────────────────────────────────────*
+     * 10) RESPONSIVE BREAKPOINTS                                                  *
+     *────────────────────────────────────────────────────────────────────────*/
+    @media (max-width: 768px) {
+      nav ul {
+        gap: 4px;
+      }
+      nav ul li {
+        padding: 2px 4px;
+        font-size: 0.65rem;
+      }
+
+      .page-section {
+        padding: calc(var(--nav-height) + 20px) 15px 40px;
+      }
+
+      /* Override grid to block for smaller screens */
+      #about > div,
+      #experience > div,
+      #certifications > div {
+        display: block !important;
+      }
+
+      .welcome-images {
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+      }
+
+      #welcome h2 {
+        font-size: 1.2rem;
+      }
+
+      footer {
+        padding: 20px 10px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      nav ul li {
+        font-size: 0.55rem;
+        padding: 2px 3px;
+      }
+
+      .welcome-images {
+        grid-template-columns: 1fr;
+      }
+
+      .page-section {
+        padding: calc(var(--nav-height) + 15px) 10px 30px;
+      }
+
+      #welcome h2 {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- DARK MODE TOGGLE  -->
+  <button id="darkToggleBtn" onclick="toggleDarkMode()" aria-label="Toggle Dark Mode">🌙</button>
+
+  <!-- LOGIN SCREEN -->
+  <div id="login-screen">
+    <div class="login-box">
+      <h1>Welcome to Priyanshu's Portfolio</h1>
+      <input type="text" id="username" placeholder="Enter Your Name" required>
+      <button onclick="login()">Enter</button>
+      <p id="login-message" style="margin-top:10px; color:#f44336;"></p>
+    </div>
+  </div>
+
+  <!-- NAVIGATION BAR  -->
+  <nav style="display: none;">
+    <ul>
+      <li onclick="showSection('welcome')">Welcome</li>
+      <li onclick="showSection('about')">About Me</li>
+      <li onclick="showSection('experience')">Experience</li>
+      <li onclick="showSection('certifications')">Certifications</li>
+      <li onclick="showSection('projects')">Projects</li>
+      <li onclick="showSection('contact')">Contact</li>
+    </ul>
+  </nav>
+
+  <!-- PAGES -->
+  <div id="welcome" class="page-section">
+    <h2>Welcome, dear!</h2>
+    <p id="welcome-thankyou" style="opacity: 0; margin-top: 20px;">
+      Thank you for logging in. Use the navigation above to explore different parts of my portfolio!
+    </p>
+
+    <div class="welcome-images">
+      <img src="Tech.png" alt="Tech Image" class="Tech-img">
+      <img src="Uni.jpg" alt="University" class="uni-img">
+      <img src="Tools.jpg" alt="Tools Photo" class="tools-img">
+      <img src="Certs.jpg" alt="Certifications Photo" class="certs-img">
+      <img src="Get.jpg" alt="Another Photo" class="get-img">
+    </div>
+  </div>
+
+  <div id="about" class="page-section">
+    <h2>About Me</h2>
+    <p>
+      I’m Priyanshu — an IT enthusiast passionate about networking, cybersecurity, and emerging technologies.
+      I love creating smart solutions and constantly growing my expertise in the tech world.
+    </p>
+
+    <div style="display: grid; grid-template-columns: 180px 1fr; gap: 10px; margin-top: 30px;">
+      <div style="font-weight: bold;">Hobbies:</div>
+      <div>Likes to do weightlifting thrice a week, running occasionally, pro coffee drinker, and loves to learn about Artificial Intelligence in spare time.</div>
+
+      <div style="font-weight: bold;">Education:</div>
+      <div>Federation University, Bachelor of IT (Networking and Security), expected July 2026.</div>
+
+      <div style="font-weight: bold;">Soft Skills:</div>
+      <div>Strong communicator, confident, adaptable team player, detail-oriented, and a natural problem solver.</div>
+
+      <div style="font-weight: bold;">Career Goals:</div>
+      <div>To specialize in cybersecurity and network management, contributing to impactful and innovative tech projects.</div>
+
+      <div style="font-weight: bold;">Learning Journey:</div>
+      <div>I always try to learn something new, break things, and figure out solutions through hit-and-trial. I constantly take online courses to learn from mentors, experiment with home lab setups, and challenge myself with new tools and technologies.</div>
+
+      <div style="font-weight: bold;">Collaboration:</div>
+      <div>Took part in group projects, helping colleagues figure out complex tasks, share knowledge, and solve upfront challenges.</div>
+
+      <div style="font-weight: bold;">Favorite Tools:</div>
+      <div>Cisco Packet Tracer, Wireshark, Windows Server, GitHub, Linux, Azure Cloud, AI prompts, AI automation.</div>
+
+      <div style="font-weight: bold;">Personality Touch:</div>
+      <div>I'm curious, reliable, and love to solve puzzles — whether in tech or everyday life. I enjoy learning from failures and always believe in myself.</div>
+    </div>
+
+    <img src="About me.jpg" alt="Priyanshu" class="about-me-img">
+  </div>
+
+  <div id="experience" class="page-section">
+    <h2>Experience</h2>
+
+    <div style="display: grid; grid-template-columns: 220px 1fr; gap: 10px; margin-top: 20px;">
+      <div style="font-weight: bold;">Bhavyam Group Pty Ltd (VIP):</div>
+      <div>Worked independently and in teams while maintaining confidentiality and compliance; coordinated scheduling, task checklists, and time-sensitive duties using digital tools.</div>
+
+      <div style="font-weight: bold;">Electrolux Home Products Cooking Plant:</div>
+      <div>Identified and reported mechanical or process issues to reduce downtime and maintain workflow; collaborated with cross-functional teams to support lean production and continuous improvement practices.</div>
+
+      <div style="font-weight: bold;">Uber Driver:</div>
+      <div>Demonstrated strong time management, independence, and adaptability in a fast-paced, on-demand environment; leveraged mobile technology and real-time updates to improve delivery outcomes and meet performance targets.</div>
+    </div>
+
+    <div style="text-align: center; margin-top: 30px;">
+      <img 
+        src="Experience.png" 
+        alt="Experience Screenshot" 
+        style="max-width: 100%; height: auto;">
+    </div>
+  </div>
+
+  <div id="certifications" class="page-section">
+    <h2>Certifications</h2>
+
+    <div style="display: grid; grid-template-columns: 260px 1fr; gap: 10px; margin-top: 20px;">
+      <div style="font-weight: bold;">Google IT Support:</div>
+      <div>Diagnosing and solving hardware, software, and networking issues; command-line interface basics; managing user accounts, permissions, and security; basic cybersecurity concepts (malware, phishing, encryption); managing computer hardware components and peripherals; basic bash or PowerShell scripting for automating tasks; communicating effectively with non-technical users; documenting processes and creating knowledge base articles.</div>
+
+      <div style="font-weight: bold;">Career Essentials in CyberSecurity (Microsoft & LinkedIn):</div>
+      <div>Knowledge of confidentiality, integrity, and availability; identifying common threats (phishing, malware, ransomware); implementing secure network configurations and encryption; understanding firewalls, VPNs, IDS/IPS, and secure protocols; analytical thinking and problem-solving.</div>
+
+      <div style="font-weight: bold;">Generative AI Automation Specialization:</div>
+      <div>Understanding of large language models (LLMs) like ChatGPT; applying AI tools for text generation, image generation, and idea brainstorming; familiarity with platforms like Zapier; using AI tools for social media post creation, scheduling, and optimization; awareness of bias, fairness, and ethical challenges in AI; automating document generation (Google Docs, Microsoft 365).</div>
+
+      <div style="font-weight: bold;">Microsoft Azure AI Essentials:</div>
+      <div>Understanding core AI concepts (machine learning, deep learning, neural networks); familiarity with Azure Cognitive Services (Vision, Speech, Language, Decision); understanding supervised vs. unsupervised learning; applying text analytics, language understanding, and sentiment analysis; extracting insights from images and videos using Azure Vision; awareness of ethical principles in AI (fairness, reliability, and privacy).</div>
+
+      <div style="font-weight: bold;">Microsoft Security Essentials (AI-Powered Protection):</div>
+      <div>Understanding core security concepts (threats, vulnerabilities, risk management); knowledge of CIA principles; familiarity with Microsoft Defender and Intune; managing identities with Azure Active Directory (Azure AD); applying Zero Trust principles; using Security Incident and Event Management (SIEM) and Security Orchestration, Automation, and Response (SOAR) tools.</div>
+    </div>
+  </div>
+
+  <div id="projects" class="page-section">
+    <h2>Projects</h2>
+    <ul>
+      <li><strong>Jungle Lumina (Unity Game):</strong> Designed an immersive, interactive game blending creativity with strong technical mechanics.</li>
+      <li><strong>Cisco Packet Tracer:</strong> Hands-on experience with Packet Tracer and created multiple projects during my studies.</li>
+    </ul>
+
+    <h3>My Game Demo Video</h3>
+    <video controls style="max-width: 100%; margin-bottom: 20px;">
+      <source src="My game.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+
+    <img src="Packet Tracer1.jpg" alt="Packet Tracer Project" class="Packet-Tracer1-img" style="max-width: 100%; height: auto; margin-top: 20px;">
+
+    <h3>Download My Packet Tracer File</h3>
+    <a href="Packet Tracer.pkt" download style="font-size: 1.1rem; color: var(--accent);">
+      📥 Click here to download Packet Tracer Project
+    </a>
+  </div>
+
+  <div id="contact" class="page-section">
+    <h2>Contact Me</h2>
+    <p>Email: <a href="mailto:priyanshuror00@gmail.com">priyanshuror00@gmail.com</a></p>
+    <p>Phone: 0478199436</p>
+    <p>LinkedIn: <a href="https://www.linkedin.com/in/priyanshu-kainwal-38242a287" target="_blank">Priyanshu Kainwal</a></p>
+    <form id="contact-form">
+      <input type="text" name="user_name" placeholder="Your Name" required />
+      <input type="email" name="user_email" placeholder="Your Email" required />
+      <textarea name="message" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© Priyanshu — Building smart, secure, and future-ready IT solutions.</p>
+    <div class="social-icons">
+      <a href="https://www.instagram.com/priyanshukainwal" target="_blank" aria-label="Instagram">
+        <img src="https://img.icons8.com/ios-filled/30/ffffff/instagram-new.png" alt="Instagram Icon" />
+      </a>
+      <a href="https://www.linkedin.com/in/priyanshu-kainwal-38242a287" target="_blank" aria-label="LinkedIn">
+        <img src="https://img.icons8.com/ios-filled/30/ffffff/linkedin.png" alt="LinkedIn Icon" />
+      </a>
+      <a href="https://github.com/Priyanshukainwal0" target="_blank" aria-label="GitHub">
+        <img src="https://img.icons8.com/ios-filled/30/ffffff/github.png" alt="GitHub Icon" />
+      </a>
+    </div>
+  </footer>
+
+  <!-- ────────────────────────────────────────────────────────────────────────*
+       11) EMAILJS SDK + SCRIPT SECTION                                          *
+       *──────────────────────────────────────────────────────────────────────── */>
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+
+  <script>
+    function toggleDarkMode() {
+      document.documentElement.classList.toggle('dark-mode');
+    }
+
+    function login() {
+      const username = document.getElementById('username').value.trim();
+      const message = document.getElementById('login-message');
+
+      if (username) {
+        document.getElementById('login-screen').style.display = 'none';
+        document.querySelector('nav').style.display = 'flex';
+        showSection('welcome');
+        document.querySelector('footer').style.display = 'block';
+      } else {
+        message.textContent = '❌ Please enter your name to continue.';
+      }
+    }
+
+    function showSection(sectionId) {
+      document.querySelectorAll('.page-section').forEach(sec => sec.style.display = 'none');
+      const section = document.getElementById(sectionId);
+      section.style.display = 'block';
+
+      if (sectionId === 'welcome') {
+        const welcomeHeading = section.querySelector('h2');
+        const thankYou = section.querySelector('p');
+        const imageClasses = [
+          '.Tech-img',
+          '.uni-img',
+          '.tools-img',
+          '.certs-img',
+          '.get-img'
+        ];
+
+        // Animate heading
+        if (welcomeHeading) {
+          welcomeHeading.style.opacity = '0';
+          welcomeHeading.style.animation = 'none';
+          void welcomeHeading.offsetWidth;
+          welcomeHeading.style.animation = 'swipeIn 1s ease-out forwards';
+        }
+
+        // Animate thank-you text after heading
+        if (thankYou) {
+          thankYou.style.opacity = '0';
+          setTimeout(() => {
+            thankYou.style.transition = 'opacity 1s ease-out';
+            thankYou.style.opacity = '1';
+          }, 1000);
+        }
+
+        // Animate each image in order with stagger
+        imageClasses.forEach((selector, index) => {
+          const img = section.querySelector(selector);
+          if (img) {
+            img.style.opacity = '0';
+            img.style.transform = 'scale(0.8)';
+            setTimeout(() => {
+              img.style.transition = 'opacity 1s ease-out, transform 1s ease-out';
+              img.style.opacity = '1';
+              img.style.transform = 'scale(1)';
+            }, 500 + index * 400);
+          }
+        });
+      }
+    }
+
+    // Initialize EmailJS (drop in your own user/public key if necessary)
+    (function(){
+      emailjs.init("xk9fd-OzhfjQ56lZW");
+    })();
+
+    // Handle the contact form submission
+    document.getElementById('contact-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+      emailjs.sendForm('service_vb67une', 'template_elsj2y6', this)
+        .then(() => {
+          alert('✅ Email sent successfully! Thank you for contacting me.');
+          this.reset();
+        }, (error) => {
+          alert('❌ Failed to send email: ' + JSON.stringify(error));
+        });
+    });
+
+    // Hide all sections until login
+    document.querySelector('footer').style.display = 'none';
+    document.querySelectorAll('.page-section').forEach(sec => sec.style.display = 'none');
+  </script>
+</body>
+</html>
 
       .page-section {
         padding: calc(var(--nav-height) + 20px) 15px 40px;
