@@ -111,7 +111,7 @@
     }
 
     nav ul li {
-      padding: 3px 5px;       /* reduced padding further */
+      padding: 3px 5px;       /* reduced padding */
       border-radius: 4px;
       color: var(--text-dark);
       cursor: pointer;
@@ -345,14 +345,18 @@
      *────────────────────────────────────────────────────────────────────────*/
     #darkToggleBtn {
       position: fixed;
-      bottom: 10px;            /* place at bottom-right corner */
-      right: 10px;
+      bottom: 16px;            /* bottom-right corner */
+      right: 16px;
       background: var(--accent);
       color: white;
       border: none;
-      padding: 4px 6px;        /* even smaller padding */
+      width: 32px;             /* fixed small width */
+      height: 32px;            /* fixed small height */
+      padding: 0;
       border-radius: 50%;
-      font-size: 12px;         /* very small font */
+      font-size: 16px;         /* icon fits inside */
+      line-height: 32px;       /* center the 🌙 vertically */
+      text-align: center;      /* center horizontally */
       cursor: pointer;
       z-index: 300;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
@@ -422,7 +426,7 @@
 </head>
 
 <body>
-  <!-- DARK MODE TOGGLE (now very small, bottom-right) -->
+  <!-- DARK MODE TOGGLE (very small, bottom-right) -->
   <button id="darkToggleBtn" onclick="toggleDarkMode()" aria-label="Toggle Dark Mode">🌙</button>
 
   <!-- LOGIN SCREEN -->
@@ -435,7 +439,7 @@
     </div>
   </div>
 
-  <!-- NAVIGATION BAR (buttons now even smaller so “Contact” definitely fits) -->
+  <!-- NAVIGATION BAR (buttons now even smaller so “Contact” fits) -->
   <nav style="display: none;">
     <ul>
       <li onclick="showSection('welcome')">Welcome</li>
