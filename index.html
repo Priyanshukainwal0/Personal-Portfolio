@@ -580,33 +580,33 @@
 <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 <script>
   emailjs.init("xk9fd-OzhfjQ56lZW");
-
-  const form = document.getElementById("contact-form");
+const form = document.getElementById("contact-form");
   const status = document.getElementById("form-status");
 
   form.addEventListener("submit", function(e) {
     e.preventDefault();
+
     const formData = new FormData(form);
+    const data = {
+      user_name: form.user_name.value,
+      user_email: form.user_email.value,
+      message: form.message.value
+    };
 
-    // Send to Zapier
-fetch("https://hooks.zapier.com/hooks/catch/23372308/uyjpjfdq/", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({
-    user_name: form.user_name.value,
-    user_email: form.user_email.value,
-    message: form.message.value
-  })
-})
-.then(() => {
-  console.log("✅ Sent to Zapier");
-})
-.catch(() => {
-  console.error("❌ Zapier failed");
-});
-
+    // Send to Zapier Webhook
+    fetch("https://hooks.zapier.com/hooks/catch/23372308/uyjpjfdq/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    })
+    .then(() => {
+      console.log("✅ Sent to Zapier");
+    })
+    .catch(() => {
+      console.error("❌ Zapier failed");
+    });
 
     // Send to EmailJS
     emailjs.sendForm("service_vb67une", "template_elsj2y6", form)
@@ -619,6 +619,7 @@ fetch("https://hooks.zapier.com/hooks/catch/23372308/uyjpjfdq/", {
       });
   });
 </script>
+  
 
 
   <!-- FOOTER -->
@@ -716,17 +717,7 @@ fetch("https://hooks.zapier.com/hooks/catch/23372308/uyjpjfdq/", {
       emailjs.init("xk9fd-OzhfjQ56lZW");
     })();
 
-    // Handle the contact form submission
-    document.getElementById('contact-form').addEventListener('submit', function(event) {
-      event.preventDefault();
-      emailjs.sendForm('service_vb67une', 'template_elsj2y6', this)
-        .then(() => {
-          alert('✅ Email sent successfully! Thank you for contacting me.');
-          this.reset();
-        }, (error) => {
-          alert('❌ Failed to send email: ' + JSON.stringify(error));
-        });
-    });
+
 
     // Hide all sections until login
     document.querySelector('footer').style.display = 'none';
