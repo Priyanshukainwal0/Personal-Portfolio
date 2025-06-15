@@ -582,6 +582,15 @@
   </form>
 </div>
 
+<script>
+  const zapierForm = document.querySelector('form[action*="hooks.zapier.com"]');
+  zapierForm.addEventListener('submit', function (e) {
+    setTimeout(() => {
+      alert('✅ Your message has been sent successfully!');
+      zapierForm.reset(); // Clear the form
+    }, 1000); // wait a moment for the data to send
+  });
+</script>
 
   <!-- FOOTER -->
   <footer>
