@@ -589,16 +589,24 @@
     const formData = new FormData(form);
 
     // Send to Zapier
-    fetch("https://hooks.zapier.com/hooks/catch/23372308/uyjpjfdq/", {
-      method: "POST",
-      body: formData
-    })
-    .then(() => {
-      console.log("✅ Sent to Zapier");
-    })
-    .catch(() => {
-      console.error("❌ Zapier failed");
-    });
+fetch("https://hooks.zapier.com/hooks/catch/23372308/uyjpjfdq/", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    user_name: form.user_name.value,
+    user_email: form.user_email.value,
+    message: form.message.value
+  })
+})
+.then(() => {
+  console.log("✅ Sent to Zapier");
+})
+.catch(() => {
+  console.error("❌ Zapier failed");
+});
+
 
     // Send to EmailJS
     emailjs.sendForm("service_vb67une", "template_elsj2y6", form)
